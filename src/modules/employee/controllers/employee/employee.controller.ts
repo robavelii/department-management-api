@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateEmployeeDto } from '../../dto/create-employee.dto';
 import { UpdateEmployeeDto } from '../../dto/update-employee.dto';
 import { Employee } from '../../entities/employee.entity';
@@ -27,6 +27,16 @@ export class EmployeeController {
   }
 
   @Get()
+  @ApiParam({
+    name: 'limit',
+    type: Number,
+    required: false,
+  })
+  @ApiParam({
+    name: 'page',
+    type: Number,
+    required: false,
+  })
   async findAll(
     @Query('page') page = 1,
     @Query('limit') limit = 10,
